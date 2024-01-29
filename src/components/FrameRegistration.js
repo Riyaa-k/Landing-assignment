@@ -38,7 +38,7 @@ const FrameRegistration = () => {
            </div>
         <input className="border-none p-2 rounded-lg bg-field-color-darker text-base" placeholder="Password" type="password" />
         <a href="#" className="text-sm text-blue-500 self-start no-underline">Forgot password?</a>
-        <button className="bg-blue-500 text-white py-2 my-5 rounded-lg h-[60px] text-2xl font-bold" onClick={onButtonPrimaryClick}>
+        <button className="bg-blue-500 text-white py-2 my-5 rounded-lg h-[60px] text-2xl font-bold cursor-pointer" onClick={onButtonPrimaryClick}>
           Sign In
         </button>
       </div>

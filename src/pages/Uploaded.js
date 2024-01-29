@@ -53,6 +53,7 @@ const Uploaded = () => {
       };
 
       reader.readAsBinaryString(selectedFile);
+      alert("File uploaded successfully")
     } else {
       alert("No file selected.");
     }
