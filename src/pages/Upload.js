@@ -7,7 +7,7 @@ const Upload = () => {
       <div className="h-[32.9px] w-[197.6px] relative hidden">
         <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs bg-light-gohan hidden" />
       </div>
-      <div className="w-[218px] flex flex-col items-start justify-end pt-0 px-0 pb-0 box-border ">
+      <div className=" flex flex-col items-start justify-end pt-0 px-0 pb-0 ">
         <UploadFrame
           menuAlignSelf="stretch"
           menuHeight="1025px"

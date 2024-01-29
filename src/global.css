@@ -58,7 +58,7 @@ body {
     margin-right: 10px;
   }
 
-  /* Add other responsive styles as needed for other elements */
+ 
 }
 
 /* Mobile view styles */
@@ -72,8 +72,7 @@ body {
     display: none; /* Hide toggle button on larger screens */
   }
 
-  /* Additional styles for larger screens */
-  /* ... */
+  
 }
 
 /* Media query for screens up to 360px */
@@ -87,7 +86,39 @@ body {
   }
   .section{
     width: 10px;
+    /* margin-right: 100px; */
   }
+  .uploading{
+    margin-right: 20px;
+    width: 310px;
+    /* height: 200px; */
+  }
+  .form-table-container {
+    width: 300px;
+    padding: 0 10px; /* Adjust padding for form container */
+  }
+
+  .form-table-row {
+    
+    align-items: stretch;
+    justify-content: center;
+    float: left;
+    clear: both;
+    box-sizing: border-box;
+   
+    height:fit-content;
+    width: 500px; /* Stack elements vertically */
+  }
+
+  .form-table-cell {
+    width: 100%; /* Full width for each cell */
+    margin-bottom: 10px; /* Space out cells */
+  }
+
+  .form-table-header {
+    display: none; /* Optionally hide the header on small screens */
+  }
+
   
 }
 

@@ -3,7 +3,7 @@
 const Controls = ({ propOpacity, onSizemdIconLeftTypePrimaClick }) => {
   return (
 
-<div class="w-full max-w-[622px] flex flex-row items-start py-0 pr-6 text-center text-base text-light-trunks">
+<div class=" w-full max-w-[622px] flex flex-row items-start py-0 pr-6 text-center text-base text-light-trunks">
   
   <div class="flex-1 rounded-lg bg-light-gohan flex flex-col items-center justify-start p-4 gap-5 border border-dashed border-light-beerus-hover">
 

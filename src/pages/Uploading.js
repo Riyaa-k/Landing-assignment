@@ -10,7 +10,7 @@ const Uploading = () => {
   }, [navigate]);
 
   return (
-    <div className="w-full relative bg-gray-200 overflow-hidden flex flex-row items-start justify-start py-0 pr-[30px] pl-0 box-border gap-[30px] tracking-[normal] mq750:gap-[15px] mq1050:pl-[30px] mq1050:box-border">
+    <div className="uploading w-full relative bg-gray-200 overflow-hidden flex flex-row items-start justify-start py-0 pr-[30px] pl-0 box-border gap-[30px] tracking-[normal] mq750:gap-[15px] mq1050:pl-[30px] mq1050:box-border">
       <UploadFrame
         menuAlignSelf="unset"
         menuHeight="unset"
