@@ -11,7 +11,7 @@ const FrameRegistration = () => {
   }, [navigate]);
 
   return (
-    <form className="max-w-md m-auto p-4 flex flex-col gap-4">
+    <form className=" form max-w-md m-auto p-4 flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-17xl font-bold font-montserrat">Sign In</h1>
         <p className='text-base font-lato'>Sign in to your account</p>
@@ -28,7 +28,7 @@ const FrameRegistration = () => {
         </button>
       </div>
 
-      <div className="flex flex-col gap-4 bg-light-gohan h-[300px] w-[400px] p-8 border border-gray-300 rounded-xl">
+      <div className="form-div flex flex-col gap-4 bg-light-gohan h-[300px] w-[400px] p-8 border border-gray-300 rounded-xl">
       <div className="relative text-base font-lato text-black text-left z-[2]">
              Email address
            </div>

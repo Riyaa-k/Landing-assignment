@@ -11,9 +11,9 @@ const VectorFrame = () => {
 
   return (
   
-      <section className="flex-1 flex flex-col items-start pt-12 px-0 pb-0 max-w-[calc(100%_-_248px)] text-5xl text-black mq750:pt-2 mq1050:max-w-full font-paragraph-ui-type-text-2xl-s">
+      <section className=" flex-1 flex flex-col items-start pt-12 px-0 pb-0 max-w-[calc(100%_-_248px)] text-5xl text-black mq750:pt-2 mq1050:max-w-full font-paragraph-ui-type-text-2xl-s">
   
-      <div className="self-stretch flex flex-col items-center justify-start gap-[137px] max-w-full mq750:gap-[34px] mq450:gap-[17px] mq1125:gap-[68px]">
+      <div className=" self-stretch flex flex-col items-center justify-start gap-[137px] max-w-full mq750:gap-[34px] mq450:gap-[17px] mq1125:gap-[68px]">
         <div className="self-stretch flex flex-row flex-wrap items-end justify-start gap-[34px] max-w-full mq750:gap-[17px]">
           <div className="flex-1 flex flex-col items-start justify-center min-w-[684px] max-w-full z-[1] mq750:min-w-full">
             <div className="self-stretch flex flex-row items-center justify-start">

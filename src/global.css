@@ -14,3 +14,80 @@ body {
 ::after {
   border-width: 0;
 }
+
+/* Add this at the end of your CSS file */
+@media only screen and (max-width: 360px) {
+ 
+ 
+
+  /* Styles for FrameSignIn component */
+ 
+  .h1{
+    display: none ;
+  }
+  .social{
+    bottom: 0;
+    display: none;
+  }
+  .left{
+    width: 500px;
+    height: 100px;
+  }
+  .logo{
+    top: 5px;
+    margin-top: 10px;
+    height: 50px;
+    width: 50px;
+    
+  }
+  .logo-img{
+    position: absolute;
+    top: 30px;
+    left: 2;
+  }
+
+  /* Styles for FrameRegistration component */
+  .form{
+     margin-top: 0%;
+     width: 300px;
+     height: auto;
+     
+  }
+  .form-div{
+    width: 240px;
+    margin-right: 10px;
+  }
+
+  /* Add other responsive styles as needed for other elements */
+}
+
+/* Mobile view styles */
+.mobile-only {
+  display: none;
+}
+
+/* Media query for screens larger than 360px */
+@media (min-width: 361px) {
+  .mobile-only {
+    display: none; /* Hide toggle button on larger screens */
+  }
+
+  /* Additional styles for larger screens */
+  /* ... */
+}
+
+/* Media query for screens up to 360px */
+@media (max-width: 360px) {
+  .mobile-only {
+    display: block;
+     /* Show toggle button on smaller screens */
+  }
+  .nav{
+    width: 300px;
+  }
+  .section{
+    width: 10px;
+  }
+  
+}
+

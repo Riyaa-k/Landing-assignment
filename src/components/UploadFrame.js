@@ -1,17 +1,54 @@
-
+import { useState,useEffect } from "react";
 const UploadFrame = ({ menuAlignSelf, menuHeight, bGAlignSelf, fRAMEAlignSelf }) => {
-  return (
-    <div
-      className="flex flex-col items-start justify-end pt-0 px-0 pb-0 shrink-0 mq1050:hidden"
-      style={{ height: menuHeight }}
-    >
-      <nav
-        className={`m-0 bg-light-gohan flex flex-col items-start justify-start pt-[51px] px-0 pb-[479px] gap-[40px] text-left text-base text-text font-nunito mq750:pt-[21px] mq750:pb-[202px] mq750:box-border mq1050:pt-[33px] mq1050:pb-[311px] mq1050:box-border ${bGAlignSelf}`}
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) { // Adjust this value based on your breakpoint for mobile view
+        setIsSidebarOpen(false);
+      } else {
+        setIsSidebarOpen(true);
+      }
+    };
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Call the function to set the initial state
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <>
+    {/* Toggle Button */}
+    <button onClick={toggleSidebar} className="toggle-button mobile-only ">
+        <img src="/toggle.png" className="h-6 w-6" alt="toggle" />
+      </button>
+
+      <div
+        className="flex flex-col items-start justify-end pt-0 px-0 pb-0 shrink-0"
+        style={{ height: menuHeight }}
       >
+       
+     <nav
+        className={`nav m-0 bg-light-gohan flex flex-col ${
+          isSidebarOpen ? "items-start" : "hidden"
+        } justify-start pt-[51px] px-0 pb-[479px] gap-[40px] text-left text-base text-text font-nunito mq750:pt-[21px] mq750:pb-[202px] mq750:box-border mq1050:pt-[33px] mq1050:pb-[311px] mq1050:box-border ${bGAlignSelf}`}
+      >
+       
         <div className="self-stretch relative bg-light-gohan h-[1047px] hidden" />
+        
         {/* Logo */}
         <div className={`h-13 flex flex-row items-start justify-start py-0 pr-14 pl-14 box-border text-5xl ${fRAMEAlignSelf}`}>
+
+               
           <div className="flex flex-row items-center justify-start gap-[15px]">
             <div className="h-[42px] w-[42px] relative">
               <img
@@ -32,6 +69,7 @@ const UploadFrame = ({ menuAlignSelf, menuHeight, bGAlignSelf, fRAMEAlignSelf })
           </div>
         </div>
         {/* sidebar components */}
+      
         <div className="w-[146px] flex flex-col items-end justify-start gap-[24px] text-darkgray-100">
           <div className="flex items-center justify-start pl-5 gap-3.5">
             <img
@@ -131,9 +169,11 @@ const UploadFrame = ({ menuAlignSelf, menuHeight, bGAlignSelf, fRAMEAlignSelf })
             </div>
           </div>
         </div>
+        
 
       </nav>
     </div>
+    </>
   );
 };
 
