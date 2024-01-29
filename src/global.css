@@ -107,13 +107,10 @@ body {
     box-sizing: border-box;
    
     height:fit-content;
-    width: 500px; /* Stack elements vertically */
+    width:180px; /* Stack elements vertically */
   }
 
-  .form-table-cell {
-    width: 100%; /* Full width for each cell */
-    margin-bottom: 10px; /* Space out cells */
-  }
+ 
 
   .form-table-header {
     display: none; /* Optionally hide the header on small screens */

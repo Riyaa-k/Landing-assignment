@@ -8,46 +8,53 @@ const Uploaded = () => {
   const [tableData, setTableData] = useState([]);
   const [uploadedFileName, setUploadedFileName] = useState("");
   const [selectedTagsMap, setSelectedTagsMap] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFileName, setSelectedFileName] = useState("");
 
-  const handleFileUpload = (file) => {
-    const reader = new FileReader();
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setSelectedFileName(file.name); // Update the file name
+    }
 
-    reader.onload = (event) => {
-      const binaryString = event.target.result;
-
-      try {
-        const workbook = XLSX.read(binaryString, { type: "binary" });
-        const sheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[sheetName];
-        const data = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-        const formattedData = data.map((row, index) => ({
-          slNo: index + 1,
-          link: row[0], // Assuming the first column contains link data
-          prefix: row[1], // Assuming the second column contains prefix data
-          tags: row[2] ? row[2].split(", ") : [], // Split tags into an array
-          selectedTags: row[3], // Assuming the fourth column contains selected tag data
-        }));
-
-        setTableData(formattedData);
-        setUploadedFileName(file.name);
-      } catch (error) {
-        console.error('Error reading file:', error);
-      }
-    };
-
-    reader.readAsBinaryString(file);
+    // Reset the file input
+    event.target.value = '';
   };
 
-  const handleUploadClick = () => {
-    const fileInput = document.getElementById("upload-button");
-    if (fileInput) {
-      const file = fileInput.files[0];
-      if (file) {
-        handleFileUpload(file);
-      } else {
-        console.error("No file selected.");
-      }
+
+
+  const handleFileUpload = () => {
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        const binaryString = event.target.result;
+
+        try {
+          const workbook = XLSX.read(binaryString, { type: "binary" });
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          const data = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+          const formattedData = data.map((row, index) => ({
+            slNo: index + 1,
+            link: row[0], // Assuming the first column contains link data
+            prefix: row[1], // Assuming the second column contains prefix data
+            tags: row[2] ? row[2].split(", ") : [], // Split tags into an array
+            selectedTags: row[3], // Assuming the fourth column contains selected tag data
+          }));
+
+          setTableData(formattedData);
+          setUploadedFileName(selectedFile.name);
+        } catch (error) {
+          console.error('Error reading file:', error);
+        }
+      };
+
+      reader.readAsBinaryString(selectedFile);
+    } else {
+      alert("No file selected.");
     }
   };
 
@@ -56,12 +63,20 @@ const Uploaded = () => {
     const updatedTags = tags.includes(tag)
       ? tags.filter((t) => t !== tag)
       : [...tags, tag];
-  
+
     setSelectedTagsMap({
       ...selectedTagsMap,
       [rowIndex]: updatedTags,
     });
   };
+
+  const handleDeleteFile = () => {
+    setTableData([]);
+    setUploadedFileName("");
+    setSelectedFile(null);
+    setSelectedFileName(""); // Also clear the selected file name
+  };
+
 
   return (
     <div className="uploading w-full relative bg-gray-200 overflow-hidden flex flex-row items-start justify-start pt-0 pb-[199px] pr-[30px] pl-0 box-border gap-[30px] tracking-[normal] mq750:gap-[15px] mq1050:pl-[30px] mq1050:box-border">
@@ -93,37 +108,50 @@ const Uploaded = () => {
               />
             </div>
           </div>
-          
-          
+
+
           <div className="w-full max-w-[622px] flex flex-row items-start py-0 pr-6 text-center text-base text-light-trunks">
+
             <div className="flex-1 rounded-lg bg-light-gohan flex flex-col items-center justify-start p-4 gap-5 border border-dashed border-light-beerus-hover">
               <div className="w-full pt-24 pb-20 pr-5 pl-5 gap-4">
                 <img className="w-9 h-9" loading="eager" alt="" src="/frame-7682.svg" />
+
                 <div className="leading-6">
-                  <span>Drop your excel sheet here or </span>
-                  <label htmlFor="upload-button" className="cursor-pointer text-mediumslateblue-200">
-                    browse
-                    <input
-                      type="file"
-                      accept=".xlsx, .xls"
-                      id="upload-button"
-                      className="hidden"
-                      onChange={(e) => handleFileUpload(e.target.files[0])}
-                    />
-                  </label>
+                  {!selectedFile && (
+                    <>
+                      <span>Drop your excel sheet here or </span>
+                      <label htmlFor="upload-button" className="cursor-pointer text-mediumslateblue-200">
+                        browse
+                      </label>
+                    </>
+                  )}
+                  {selectedFile && <p> {selectedFileName}</p>}
+                  <input
+                    type="file"
+                    accept=".xlsx, .xls"
+                    id="upload-button"
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
                 </div>
-                <input
-                  type="file"
-                  accept=".xlsx, .xls"
-                  className="w-full h-[258px] rounded-lg border border-dashed border-light-beerus-hover hidden"
-                  onChange={(e) => handleFileUpload(e.target.files[0])}
-                />
-                {uploadedFileName && (
-                  <div className="mt-2 text-sm text-gray-500">{uploadedFileName} added</div>
+
+
+
+
+                {selectedFileName && (
+                  <div className="flex items-center justify-center">
+
+                    <button onClick={handleDeleteFile} className="text-red-500 bg-transparent cursor-pointer ">
+                      Remove
+                    </button>
+
+
+                  </div>
                 )}
+
               </div>
               <button
-                onClick={handleUploadClick}
+                onClick={handleFileUpload}
                 className="cursor-pointer border-none py-4 px-5 bg-mediumslateblue-200 self-stretch rounded-lg overflow-hidden flex items-center justify-center gap-2 hover:bg-mediumslateblue-100"
               >
                 <img className="h-6 w-6" alt="" src="/icon.svg" />
@@ -132,8 +160,9 @@ const Uploaded = () => {
                 </div>
               </button>
             </div>
+
           </div>
-          
+
           <div className="w-[1076px] flex flex-row items-start justify-start py-0 pr-0 pl-[11px] box-border max-w-full">
             <div className="flex-1 flex flex-col items-start justify-start gap-[46px] min-h-[521px] max-w-full mq750:gap-[23px]">
               <h2 className="m-0 w-[133px] relative text-inherit leading-[32px] font-semibold font-inherit flex items-center mq450:text-lgi mq450:leading-[26px]">
@@ -176,7 +205,8 @@ const Uploaded = () => {
                 </div>
 
                 {/* Table Content */}
-                <div className="w-full">
+                {/* Table Content */}
+                <div className="w-full overflow-y-auto max-h-[400px]">
                   {/* Table rows */}
                   {tableData.map((rowData, index) => (
                     <div
@@ -206,7 +236,7 @@ const Uploaded = () => {
                               {rowData.prefix}
                             </div>
                           </div>
-                          
+
 
                           <div className="w-[137px] flex flex-col items-start justify-start">
                             <select
@@ -220,7 +250,7 @@ const Uploaded = () => {
                               ))}
                             </select>
                           </div>
-                          
+
                           <div className="flex flex-row flex-wrap items-start justify-start gap-[8px]">
                             {Array.isArray(selectedTagsMap[index]) &&
                               selectedTagsMap[index].map((tag, i) => (
@@ -240,7 +270,7 @@ const Uploaded = () => {
                                 </button>
                               ))}
                           </div>
-                          
+
                         </div>
                       </div>
                     </div>
